@@ -1,0 +1,1 @@
+this is not the codes or my my coding work but rather a small personal portfolio website along side a small sitcom card i made using css+html in notepad. I am on learning phase of html and css and along side practicing by making stuffs like this
