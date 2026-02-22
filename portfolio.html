@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piyush Misal | Portfolio</title>
+    <style>
+  
+        :root {
+            --bg-color: #050505;       /* Deepest Black */
+            --card-bg: #111111;        /* Dark Grey */
+            --accent: #00f2ff;         /* Cyan (Tech/AI look) */
+            --text-main: #ffffff;
+            --text-muted: #888888;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace; 
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+        }
+
+        .hero span {
+            color: var(--accent);
+            text-shadow: 0 0 20px var(--accent); 
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-top: 20px;
+            line-height: 1.6;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            animation: bounce 2s infinite;
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+       
+        .projects-section {
+            padding: 100px 5%;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            border-left: 4px solid var(--accent);
+            padding-left: 20px;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+      
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid #333;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);         }
+
+        .card-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            filter: grayscale(100%); 
+            transition: 0.4s;
+        }
+
+        .card:hover .card-img {
+            filter: grayscale(0%);         }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .read-more {
+            color: var(--accent);
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+   
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: none; /* Hidden initially */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-content {
+            background: #111;
+            width: 80%;
+            max-width: 800px;
+            border: 1px solid var(--accent);
+            border-radius: 15px;
+            padding: 40px;
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+            box-shadow: 0 0 50px rgba(0, 242, 255, 0.1);
+        }
+
+        /* Reveal Animation Classes */
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close-btn:hover { color: var(--accent); }
+
+        .modal-title { font-size: 2.5rem; margin-bottom: 20px; color: var(--accent); }
+        .modal-body { font-family: Arial, sans-serif; line-height: 1.6; color: #ccc; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <h1>Piyush Misal <span id="typewriter">| Portfolio</span></h1>
+        <p>Mechanical Engineering Student | Robotics Enthusiast | Developer</p>
+        <div class="scroll-indicator">↓</div>
+    </section>
+
+    <section class="projects-section">
+        <h2 class="section-title">My Achievements</h2>
+
+        <div class="grid">
+            <div class="card" onclick="openModal('modal1')">
+                <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=800" class="card-img" alt="Robot">
+                <div class="card-content">
+                    <h3 class="card-title">Project TARS</h3>
+                    <p class="card-desc">A functional replica of the Interstellar robot with AI integration.</p>
+                    <span class="read-more">Click to View Details →</span>
+                </div>
+            </div>
+
+            <div class="card" onclick="openModal('modal2')">
+                <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?q=80&w=800" class="card-img" alt="AI">
+                <div class="card-content">
+                    <h3 class="card-title">Robotics & AI</h3>
+                    <p class="card-desc">First-year engineering milestones and custom rover designs.</p>
+                    <span class="read-more">Click to View Details →</span>
+                </div>
+            </div>
+
+            <div class="card" onclick="openModal('modal3')">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800" class="card-img" alt="Code">
+                <div class="card-content">
+                    <h3 class="card-title">Python Development</h3>
+                    <p class="card-desc">Advanced scripting and automation projects.</p>
+                    <span class="read-more">Click to View Details →</span>
+                </div>
+            </div>
+
+             <div class="card" onclick="openModal('modal4')">
+                <img src="https://images.unsplash.com/photo-1528164344705-47542687000d?q=80&w=800" class="card-img" alt="Japan">
+                <div class="card-content">
+                    <h3 class="card-title">Language Studies</h3>
+                    <p class="card-desc">My journey learning Japanese vocabulary and structure.</p>
+                    <span class="read-more">Click to View Details →</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal-overlay" id="modal1">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal1')">&times;</span>
+            <h2 class="modal-title">Project TARS</h2>
+            <div class="modal-body">
+                <p><strong>Status:</strong> In Progress<br><strong>Tech Stack:</strong> Arduino, Python, Servo Motors</p>
+                <br>
+                <p>This is my flagship project: building a fully functional miniature version of TARS from the movie Interstellar. The goal is to replicate the unique walking mechanism using high-torque servos and integrate an AI voice assistant so it can actually converse like the character in the film. I am using my personal made assistant in python named "Nexus" which is using gemini api. Still i am working on the design of the model and because i am working on nexus v3 its still on hold, but i am sure that this will become true and practical very soon.</p>
+                <br>
+                <p>Currently working on the design and balancing algorithms.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal2">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal2')">&times;</span>
+            <h2 class="modal-title">Robotics Journey</h2>
+            <div class="modal-body">
+                <p><strong>University:</strong> MIT Academy of Engineering<br><strong>Focus:</strong> Mechanical & Robotics/AI</p>
+                <br>
+                <p>As a 1st year Mechanical Engineering student, I am bridging the gap between hardware and software. My achievements include scoring a 7.3 SGPA in the first semester and successfully designing basic autonomous systems. I have got several participation certificates including most recent from Tata crucial Quiz from Unstop that i have posted on Linkedin Profile. In college till now nothing special has achieved but our team was qualified in final for maths poster competition but didn't won quite :). But yes it has ignited the spark to make participate in more competitions in future taking the opportunities and earning to make resume powerfull which can help in getting admission for masters abroad in japanese university or in UK</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal3">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal3')">&times;</span>
+            <h2 class="modal-title">Python & Automation</h2>
+            <div class="modal-body">
+                <p>Detailed breakdown of my coding projects, including my personal AI assistant 'Nexus' and various automation scripts used to streamline daily tasks.
+-Nexus was the begining project in my learning journey of AI and ML. I have previously created two tts chatbots and learning from them i have made this AI chatbot. I have used Gemini's API for tokens and datasets but if credits are low then for that i am using deepseek's 8b parameters model to take place to prevent callback error, like that for tts i am using elevenlabs tts but if the credits are low it switches to edge tts. Honestly saying as it was my very 1st projects i had to take helps from severals platforms including youtube and github for understanding and gemini to solve small-small errors. In making this i faced lots of errors and solutions were not quite easy but it made my journey adventurous.Now currently working on v3</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal4">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal4')">&times;</span>
+            <h2 class="modal-title">Japanese Language</h2>
+            <div class="modal-body">
+                <p>Exploring the linguistic structure of Japanese, learning kanji, katana and hirangana using duolingo and bunpo currently on N5 or less : ) but as learning new language always takes time patience is only key to success, I am learning this language because it will help me to get to japanese university to learn about their Robotics and AI technology in deep, Even i love their culture so that is even one more Point.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to Open Modal
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'flex'; // Make it visible first
+            // Small delay to allow the fade-in animation to trigger
+            setTimeout(() => {
+                modal.classList.add('active');
+            }, 10);
+        }
+
+        // Function to Close Modal
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('active'); // Trigger fade out
+            
+            // Wait for animation to finish before hiding completely
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        // Close modal if user clicks outside the box
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                // Find which modal is open and close it
+                const modals = document.querySelectorAll('.modal-overlay');
+                modals.forEach(modal => {
+                    if (modal.classList.contains('active')) {
+                        modal.classList.remove('active');
+                        setTimeout(() => {
+                            modal.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            }
+        }
+    </script>
+
+</body>
+</html>
